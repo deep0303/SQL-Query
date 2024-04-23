@@ -1,0 +1,9 @@
+select product, Brand,Sale_Price, Market_Price 
+from products
+where productid in (
+	select productid from  OrderDetails
+	where  quantity = 5
+    group by productid
+    having count(distinct orderid) > 1
+)
+order by product
