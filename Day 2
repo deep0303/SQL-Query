@@ -1,0 +1,3 @@
+select OrderId, CustomerId, OrderDate ,PaymentType,ramk() over(partion by orderid order by  from orders o
+join payments p
+on o.paymentid=p.paymentid
