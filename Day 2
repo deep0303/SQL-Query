@@ -15,3 +15,18 @@ JOIN (
 ) AS max_orders ON o.CustomerID = max_orders.CustomerID AND o.Total_Order_Amount = max_orders.Total_Order_Amount
 ORDER BY
     o.CustomerID ASC;
+
+
+WITH cte1 AS (
+    SELECT CustomerID, orderdate, total_order_amount 
+    FROM orders
+),
+cte2 AS (
+    SELECT CustomerID, MAX(total_order_amount) AS total_order_amount 
+    FROM orders
+    GROUP BY CustomerID
+)
+SELECT DISTINCT cte1.CustomerID, cte1.orderdate, cte2.total_order_amount 
+FROM cte1
+INNER JOIN cte2 ON cte1.customerid = cte2.customerid and cte1.total_order_amount =cte2.total_order_amount 
+ORDER BY cte1.customerid;
