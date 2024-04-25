@@ -1,3 +1,17 @@
-select OrderId, CustomerId, OrderDate ,PaymentType,ramk() over(partion by orderid order by  from orders o
-join payments p
-on o.paymentid=p.paymentid
+SELECT
+    o.CustomerID,
+    o.OrderDate,
+    o.Total_Order_Amount AS Total_Order_Amount
+FROM
+    Orders o
+JOIN (
+    SELECT
+        CustomerID,
+        MAX(Total_Order_Amount) AS Total_Order_Amount
+    FROM
+        Orders
+    GROUP BY
+        CustomerID
+) AS max_orders ON o.CustomerID = max_orders.CustomerID AND o.Total_Order_Amount = max_orders.Total_Order_Amount
+ORDER BY
+    o.CustomerID ASC;
