@@ -1,0 +1,7 @@
+SELECT 
+    a.customerid,CONCAT(a.firstname, a.lastname) AS c11, a.country,b.customerid, CONCAT(b.firstname, b.lastname) AS c12,
+    b.country FROM customers a
+JOIN customers b ON a.country = b.country and a.dateEntered =b.dateEntered
+                AND a.customerid < b.customerid
+                 #AND CONCAT(a.firstname, a.lastname) < CONCAT(b.firstname, b.lastname)
+ORDER BY a.customerid;
