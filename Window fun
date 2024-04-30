@@ -1,0 +1,14 @@
+SELECT 
+    ProductID,
+    ProductName,
+    Quantity AS MaxQuantitySold
+FROM (
+    SELECT 
+        p.ProductID,
+        p.ProductName,
+        od.Quantity,
+        ROW_NUMBER() OVER(PARTITION BY p.ProductName ORDER BY od.Quantity DESC) AS RowNum
+    FROM  Products p
+	JOIN  OrderDetails od ON p.ProductID = od.ProductID
+) AS RankedProducts
+WHERE RowNum = 1;
