@@ -1,0 +1,9 @@
+select case when year(date_of_birth) <= 1980 then "Gen X"
+ when year(date_of_birth) between 1980 and 1996 then "Millennials"
+ else "Gen Z" end as Gen 
+ ,sum(case when (Market_price-sale_price)>0 then quantity*(Market_price-sale_price) end)  Discount from customers c 
+join orders o on c.customerid=o.customerid 
+join orderdetails od on o.orderid=od.orderid 
+join products p on p.productid=od.productid 
+group by 1
+order by gen
