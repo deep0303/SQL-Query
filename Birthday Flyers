@@ -1,0 +1,6 @@
+select firstname ,lastname ,f.flight_id from passengers  p
+join bookings b on p.passengerid =b.passengerid 
+join flights f on f.flight_id = b.flight_id 
+where day(date_of_birth) =day(departure_time) and 
+month(date_of_birth) =month(departure_time)
+order by f.flight_id ,1,2
