@@ -1,0 +1,8 @@
+
+with cte1 as(select o.CustomerID, OrderID, FirstName, LastName, PaymentID, OrderDate, Total_Order_Amount 
+,rank() over(partition by customerid order by total_order_amount ) rnk 
+ from customers c join  orders o on c.CustomerID=o.CustomerID )
+select CustomerID, OrderID, FirstName, LastName, PaymentID, OrderDate,
+ Total_Order_Amount from cte1
+ where rnk =1 
+order by 1
