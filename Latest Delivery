@@ -1,0 +1,8 @@
+SELECT o.*
+FROM orders o
+JOIN (
+    SELECT customerid, MAX(deliverydate) AS latest_delivery_date
+    FROM orders
+    GROUP BY customerid
+) AS latest_orders ON o.customerid = latest_orders.customerid AND o.deliverydate = latest_orders.latest_delivery_date
+ORDER BY o.customerid ASC;
