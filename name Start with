@@ -1,0 +1,3 @@
+select * from products
+where product(left,1) in ('A','E','I','O','U')
+order by 1
