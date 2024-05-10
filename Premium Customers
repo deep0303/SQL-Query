@@ -1,0 +1,11 @@
+/*Write a query to find out the premium customers who have ordered gross total order amount more than 100000 in the past 24 months.
+
+Print Customer ID, First name,Last name and the total amount.
+
+Order your output in ascending order of Customer ID.
+
+(Hint - For 24 months calculation consider Today's date and time)*/
+
+SELECT c.customerid, c.firstname, c.lastname, total_order_amount FROM customers c 
+JOIN orders o ON o.customerid = c.customerid
+where abs(timestampdiff(month,orderdate,now()))=24 order by c.customerid
