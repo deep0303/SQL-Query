@@ -7,3 +7,9 @@ from salesforce_employees
  where manager_id =13 
 )
 select first_name ,target from cte1 where rnk=1;
+
+or 
+SELECT first_name, target 
+FROM salesforce_employees
+WHERE manager_id = 13 
+AND target = (SELECT MAX(target) FROM salesforce_employees WHERE manager_id = 13 );
