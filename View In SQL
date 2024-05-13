@@ -1,0 +1,21 @@
+use excercise ;
+
+#Create view
+ create view Weekend_order as 
+ select * from orders ;
+ 
+ select * from Weekend_order;
+ 
+ #alter the view
+ alter view Weekend_order as 
+ select *,dayname(ORDERDATE) from orders where dayname(ORDERDATE) IN ("Saturday" ,"Sunday");
+
+select * from Weekend_order;
+
+#Renaming the view
+rename table  Weekend_order to NewView;
+
+select * from NewView;
+
+#Drop view
+drop view newview
