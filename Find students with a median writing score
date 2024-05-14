@@ -1,0 +1,33 @@
+WITH cte1 AS (
+    SELECT student_id,
+        sat_writing,
+        ROW_NUMBER() OVER (ORDER BY sat_writing DESC) AS des_rnk,
+        ROW_NUMBER() OVER (ORDER BY sat_writing) AS asc_rnk 
+    FROM 
+        sat_scores
+)
+SELECT student_id,
+    sat_writing 
+FROM 
+    cte1 
+WHERE 
+    ABS(CAST(des_rnk AS SIGNED) - CAST(asc_rnk AS SIGNED)) <= 1
+ORDER BY 
+    sat_writing; 
+
+
+or   
+
+WITH cte1 AS (
+    SELECT student_id, sat_writing, RANK() OVER(ORDER BY sat_writing) AS ranking
+    FROM sat_scores
+),
+cte2 AS (
+    SELECT FLOOR(COUNT(*)/2) AS median_number
+    FROM cte1
+)
+
+SELECT student_id
+FROM cte1
+JOIN cte2
+ON cte1.ranking = cte2.median_number
