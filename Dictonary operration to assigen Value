@@ -1,0 +1,12 @@
+n=30
+dic=dict()
+string="abcdefghijklmnopqrstuvwxyz"
+for i in string: 
+    dic[i]=n #assigen value to dict start with 30 like a:30,b=31..... 
+    n+=1
+print(dic)
+strr="abcda"
+s=0
+for i in strr:
+    s+=dic[i] #add the value of dict
+print(s)
