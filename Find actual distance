@@ -1,0 +1,2 @@
+ #lag(column ,previous calume ,returrn value if null)
+select * ,cumulative_distance-lag(cumulative_distance ,1,0) over(partition by cars order by days) total_distance from car_travels;
