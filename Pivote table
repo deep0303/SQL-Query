@@ -1,0 +1,16 @@
+select customer_id
+,ifnull(sum(case when year(sales_date)='2021' and month(sales_date)=1 then amount end),0) jan21 
+,ifnull(sum(case when year(sales_date)='2021' and month(sales_date)=2 then abs(amount) end),0) feb21
+,ifnull(sum(case when year(sales_date)='2021' and month(sales_date)=3 then abs(amount) end),0) march21
+,ifnull(sum(case when year(sales_date)='2021' and month(sales_date)=4 then abs(amount) end),0) april21
+,ifnull(sum(case when year(sales_date)='2021' and month(sales_date)=5 then abs(amount) end),0) may21
+,ifnull(sum(case when year(sales_date)='2021' and month(sales_date)=6 then abs(amount) end),0) june21
+,ifnull(sum(case when year(sales_date)='2021' and month(sales_date)=7 then abs(amount) end),0) july21
+,ifnull(sum(case when year(sales_date)='2021' and month(sales_date)=8 then abs(amount) end),0) aug21
+,ifnull(sum(case when year(sales_date)='2021' and month(sales_date)=9 then abs(amount) end),0) sep21
+,ifnull(sum(case when year(sales_date)='2021' and month(sales_date)=10 then abs(amount) end),0) oct21
+,ifnull(sum(case when year(sales_date)='2021' and month(sales_date)=11 then abs(amount) end),0) nov21
+,ifnull(sum(case when year(sales_date)='2021' and month(sales_date)=12 then abs(amount) end),0) dec21
+,abs(sum(amount))
+from sales_data
+group by 1;
