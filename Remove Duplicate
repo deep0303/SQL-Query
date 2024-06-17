@@ -1,0 +1,15 @@
+#remove duplicates
+SET SQL_SAFE_UPDATES = 0 ;
+delete from cars
+where model_id not in (select min(model_id)
+					  from cars
+					  group by model_name, brand);
+                       
+delete from cars where model_id in (                     
+select max(model_id) from cars group by model_name,brand having count(*)>1)                   
+             
+delete from cars where model_id not in (select model_id from (
+select min(model_id) from cars
+group by model_name,brand
+having count(*)>1 ) as x )             
+                       
