@@ -1,0 +1,11 @@
+#How to get the employees with their managers
+select distinct a.name,a.designation from emp_details a
+join emp_details b on a.id=b.manager_id;
+
+#emplyee under manger
+with recursive cte1 as(
+select * from emp_details
+where name="Asha"
+union 
+select b.* from cte1 a join emp_details b on a.id=b.manager_id )
+select * from cte1 ;
