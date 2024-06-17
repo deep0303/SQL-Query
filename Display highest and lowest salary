@@ -1,0 +1,6 @@
+select * ,max(salary) over(partition by dept order by salary desc) max_rnk ,min(salary) over(partition by dept order by salary ) min_rnk
+from employee;
+
+select * ,max(salary) over(partition by dept order by salary desc) max_rnk 
+,min(salary) over(partition by dept order by salary range between unbounded preceding and unbounded following) min_rnk
+from employee;
