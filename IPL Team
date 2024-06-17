@@ -1,0 +1,13 @@
+#join once
+with cte1 as(
+select *,row_number() over() id from teams )
+select a.team_name,b.team_name from cte1 a join cte1 b on a.id<b.id
+
+#join twice
+with cte1 as(
+select *,row_number() over() id from teams )
+select a.team_name,b.team_name from cte1 a join cte1 b on a.id<>b.id
+
+with cte1 as(
+select *,row_number() over() id from teams )
+select a.team_name,b.team_name from cte1 a join cte1 b on a.id=b.id
