@@ -1,0 +1,7 @@
+with recursive cte as(
+select * ,  1level from travel_item
+ union 
+select c.id,c.item_name, c.total_count-1,Level+1 from cte  c
+join travel_items t on c.id=t.id and c.item_name=t.item_name 
+where c.total_count>1)
+select * from cte
