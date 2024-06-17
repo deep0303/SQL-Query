@@ -1,0 +1,6 @@
+with cte1 as (
+select *,row_number() over() rn from src_dest_distance)
+select a.source,a.destination,a.distance from cte1 a
+ join cte1 b on a.rn<b.rn 
+ and a.source=b.destination
+ and a.destination=b.source;
