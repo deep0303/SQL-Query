@@ -1,0 +1,37 @@
+/*Identify the City from each country from which the least orders were placed.
+Print Country, City, Number of orders from the city.
+Sort the result set in alphabetical order of Country names and City names.*/
+WITH cte AS (
+    SELECT 
+        c.country,
+        c.city,
+        COUNT(*) AS cnt
+    FROM 
+        customers c 
+    JOIN 
+        orders o 
+    ON 
+        c.customerid = o.customerid
+    GROUP BY 
+        c.country, c.city
+)
+SELECT 
+    cte.country,
+    cte.city,
+    cte.cnt
+FROM 
+    cte
+JOIN (
+    SELECT 
+        country, 
+        MIN(cnt) AS min_order
+    FROM 
+        cte 
+    GROUP BY 
+        country
+) AS a 
+ON 
+    cte.country = a.country 
+    AND cte.cnt = a.mn
+ORDER BY 
+    cte.country, cte.city;
